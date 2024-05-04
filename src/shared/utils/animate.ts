@@ -10,7 +10,7 @@ const defaultTiming = (timeFraction: number) => {
 export function animate({draw, duration, timing = defaultTiming, loop = false}: {draw: Draw, duration:number, timing?: Timing, loop?: boolean }) {
   let id = null as number | null;
   let cancel = null as (() => void )| null;
-  
+
   let start = performance.now();
   
   id = requestAnimationFrame(function anim(time) {

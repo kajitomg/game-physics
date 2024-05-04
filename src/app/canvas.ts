@@ -36,8 +36,6 @@ const object = new CanvasObject({
   }
 })
 
-
-
 const object2 = new CanvasObject({
   style: {
     fillColor: '#000',

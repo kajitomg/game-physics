@@ -21,11 +21,11 @@ export class Collision {
   }
   
   collisionReaction(givingReaction: CanvasObject, reacted: CanvasObject) {
-    const velocityX = givingReaction.motion.velocityX / 2
-    const velocityY = givingReaction.motion.velocityY / 2
+    const velocityX = givingReaction.physic.velocity.current.x / 2
+    const velocityY = givingReaction.physic.velocity.current.y / 2
     
-    givingReaction.setVelocity({velocityX,velocityY})
-    reacted.setVelocity({velocityX,velocityY})
+    givingReaction.physic.setCurrentVelocity({x:velocityX,y:velocityY})
+    reacted.physic.setCurrentVelocity({x:velocityX,y:velocityY})
   }
   
   buildMap(id?:number) {
@@ -57,7 +57,7 @@ export class Collision {
     const intersecting = this.getIntersections(object.position, object.size,object.id, intersectingOffsetoffset)
     
     intersecting?.map((item) => {
-      const itemObject = this.objects.find((object) => object.id === item[4])
+      //const itemObject = this.objects.find((object) => object.id === item[4])
       const centerItemX = (item[2] - item[0]) / 2 + item[0]
       const centerItemY = (item[3] - item[1]) / 2 + item[1]
       const centerObjX = object.size.width / 2 + position.x

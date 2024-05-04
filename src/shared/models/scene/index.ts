@@ -13,7 +13,7 @@ export class Scene {
   
   private initializedObjectCount:number = 0;
   readonly objects: CanvasObject[] = [];
-  public collision: Collision
+  public collision: Collision = new Collision()
   
   constructor(selector: string, options?: {
     width?:number,
@@ -24,7 +24,6 @@ export class Scene {
       ...options,
     }
     this.mask = new Mask(selector, options)
-    this.collision = new Collision(this.objects)
     
     this.cvs = document.createElement('canvas');
     
@@ -39,6 +38,8 @@ export class Scene {
     
     this.ctx = this.cvs.getContext('2d', {})
     
+    this.createBorder()
+    
     history.scrollRestoration = 'manual'
     window.scroll({left:0, top: 0})
   }
@@ -52,5 +53,18 @@ export class Scene {
     object.init(this.getObjectId(),this)
     this.objects.push(object)
     this.collision.addCollision(object)
+  }
+  
+  createBorder() {
+    const width = 1;
+    const color = 'transparent'
+    const border = []
+    border.push(new CanvasObject({position:{x:0,y:0},size:{width: this.options.width, height: width},style:{fillColor:color}}))
+    border.push(new CanvasObject({position:{x:0,y:0},size:{width: width, height: this.options.height},style:{fillColor:color}}))
+    border.push(new CanvasObject({position:{x:0,y:this.options.height - width},size:{width: this.options.width, height: width},style:{fillColor:color}}))
+    border.push(new CanvasObject({position:{x:this.options.width - width,y:0},size:{width: width, height: this.options.height},style:{fillColor:color}}))
+    border.map((item) => {
+      this.add(item)
+    })
   }
 }

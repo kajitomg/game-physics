@@ -8,18 +8,18 @@ export class Camera {
     this.offset = offset || this.offset
   }
   
-  follow(object: CanvasObject, position: Position) {
-    if ((object.position.y - window.scrollY + this.offset >= window.innerHeight - object.size.height) && (position.y - object.position.y > 0)) {
+  follow(object: CanvasObject) {
+    if ((object.position.y - window.scrollY + this.offset >= window.innerHeight - object.size.height)) {
       window.scroll({top:object.position.y - window.innerHeight + object.size.height + this.offset})
     }
-    if ((object.position.y - this.offset < window.scrollY) && (position.y - object.position.y < 0)) {
+    if ((object.position.y - this.offset < window.scrollY)) {
       window.scroll({top:object.position.y - this.offset})
     }
     
-    if ((object.position.x - window.scrollX + this.offset >= window.innerWidth - object.size.width) && (position.x - object.position.x > 0)) {
+    if ((object.position.x - window.scrollX + this.offset >= window.innerWidth - object.size.width)) {
       window.scroll({left:object.position.x - window.innerWidth + object.size.width + this.offset})
     }
-    if ((object.position.x - this.offset < window.scrollX) && (position.x - object.position.x < 0)) {
+    if ((object.position.x - this.offset < window.scrollX)) {
       window.scroll({left:object.position.x - this.offset})
     }
   }
